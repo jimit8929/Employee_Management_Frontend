@@ -1,14 +1,13 @@
 import { useState } from "react";
 
-const Login = () => {
+const Login = ({handleLogin}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("Form Email is:" , email);
-    console.log("Form Password is:" , password);
-
+    handleLogin(email , password);
+  
     setEmail("");
     setPassword("");
   };
@@ -22,7 +21,7 @@ const Login = () => {
       {/* Glassmorphic card */}
       <div className="relative z-10 w-full max-w-md px-10 py-12 rounded-2xl backdrop-blur-lg bg-white/10 border border-white/20 shadow-2xl">
         <h2 className="text-4xl font-semibold text-white text-center mb-8 tracking-wide">
-          Welcome Back 👋
+          Login Here 👋
         </h2>
 
         <form
@@ -37,7 +36,7 @@ const Login = () => {
             type="email"
             required
             placeholder="Enter your Email"
-            className="w-full border border-emerald-400/60 rounded-full py-4 px-6 text-lg text-white bg-transparent placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+            className="w-full border border-emerald-400/60 rounded-full py-4 px-6 text-lg text-white bg-transparent focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all placeholder:text-gray-300"
           />
           <input
             value={password}
