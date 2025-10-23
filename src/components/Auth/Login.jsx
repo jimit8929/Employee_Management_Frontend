@@ -58,15 +58,6 @@ const Login = () => {
           </button>
         </form>
 
-        <p className="text-center text-gray-400 mt-6">
-          Don’t have an account?{" "}
-          <a
-            href="#"
-            className="text-emerald-400 hover:underline hover:text-emerald-300 transition-colors"
-          >
-            Sign up
-          </a>
-        </p>
       </div>
     </div>
   );
