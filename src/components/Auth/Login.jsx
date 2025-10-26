@@ -25,7 +25,7 @@ const Login = ({handleLogin}) => {
         </h2>
 
         <form
-          className="flex flex-col gap-6"
+          className="flex flex-col gap-8"
           onSubmit={(e) => {
             submitHandler(e);
           }}
