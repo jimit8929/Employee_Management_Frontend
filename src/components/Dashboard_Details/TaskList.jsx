@@ -1,11 +1,11 @@
 import React from "react";
 
-const TaskList = () => {
+const TaskList = ({data}) => {
   const tasks = [
-    { title: "New Tasks", count: 5 },
-    { title: "In Progress", count: 3 },
-    { title: "Completed", count: 8 },
-    { title: "Pending Review", count: 2 },
+    { title: "New Tasks", count: data.taskNumbers.active },
+    { title: "In Progress", count: data.taskNumbers.newTask },
+    { title: "Completed", count: data.taskNumbers.completed },
+    { title: "Pending Review", count: data.taskNumbers.failed },
   ];
 
   return (

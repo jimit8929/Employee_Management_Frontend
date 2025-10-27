@@ -1,13 +1,13 @@
-import React from "react";
 
-const Header = () => {
+const Header = ({data}) => {
+
   return (
     <header className="flex items-center justify-between px-8 py-5 border-b border-white/10 bg-white/10 backdrop-blur-md text-white shadow-lg rounded-2xl">
       {/* Left Section - Greeting */}
       <div className="flex flex-col leading-tight">
         <h1 className="text-2xl font-bold tracking-wide">Hello,</h1>
         <span className="text-3xl font-semibold bg-gradient-to-r from-emerald-400 to-teal-500 bg-clip-text text-transparent">
-          Jimit 👋
+          {data.firstName} 👋
         </span>
       </div>
 

@@ -1,6 +1,6 @@
 import React from "react";
 
-const TaskListDetails = () => {
+const TaskListDetails = ({data}) => {
   const taskDetails = [
     {
       title: "Make a YouTube video",
