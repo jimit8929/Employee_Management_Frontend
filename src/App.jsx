@@ -14,18 +14,25 @@ const App = () => {
       const loggedInUser = localStorage.getItem("loggedInUser");
 
       if (loggedInUser) {
-        setUser(loggedInUser.role);
+        try {
+          const userData = JSON.parse(loggedInUser);
+          if (userData?.role) {
+            setUser(userData.role);
+            setLoggedInUserData(userData.data || null);
+          }
+        } catch (error) {
+          console.error("Invalid user data in localStorage:", error);
+          localStorage.removeItem("loggedInUser"); // Clean it up if corrupted
+        }
       }
     }
   }, [authData]);
 
   const handleLogin = (email, password) => {
-
     if (email === "admin@me.com" && password === "123") {
       setUser("admin");
       localStorage.setItem("loggedInUser", JSON.stringify({ role: "admin" }));
-    } 
-    else if (authData) {
+    } else if (authData) {
       const employee = authData.employees.find(
         (e) => e.email === email && e.password === password
       );
@@ -38,10 +45,9 @@ const App = () => {
 
       localStorage.setItem(
         "loggedInUser",
-        JSON.stringify({ role: "employee" })
+        JSON.stringify({ role: "employee", data: employee })
       );
-    } 
-    else {
+    } else {
       alert("Invalid Credentials");
     }
   };
@@ -50,7 +56,7 @@ const App = () => {
     <>
       {!user && <Login handleLogin={handleLogin} />}
       {user === "admin" && <AdminDashboard />}
-      {user === "employee" && <EmployeeDashboard data={loggedInUserData}/>}
+      {user === "employee" && <EmployeeDashboard data={loggedInUserData} />}
     </>
   );
 };
