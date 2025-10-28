@@ -1,41 +1,46 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../context/AuthProvider";
 
 const AllTask = () => {
-  const tasks = [
-    { name: "Jimit", title: "Make a UI Design", status: "In Progress" },
-    { name: "Raj", title: "Build API Endpoint", status: "Pending" },
-    { name: "Aarav", title: "Fix Login Bug", status: "Completed" },
-    { name: "Nisha", title: "Design Dashboard", status: "Completed" },
-    { name: "Ravi", title: "Write Documentation", status: "In Progress" },
-    { name: "Mira", title: "Deploy to AWS", status: "Pending" },
-    { name: "Sahil", title: "Test API Endpoints", status: "Completed" },
-    { name: "Rina", title: "Update UI Components", status: "In Progress" },
-    // add as many tasks as you want
-  ];
+  const authData = useContext(AuthContext);
 
   return (
-    <div className="w-full flex flex-col px-6 space-y-4 justify-center items-center">
-      <div className="w-full max-w-6xl h-52 overflow-y-auto scrollbar-hide flex flex-col space-y-3">
-        {tasks.map((task, index) => (
-          <div
-            key={index}
-            className="w-full bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-6 shadow-lg text-white flex justify-between items-center hover:bg-white/20 transition-all duration-300"
-          >
-            <h2 className="text-lg font-semibold">{task.name}</h2>
-            <h3 className="text-xl font-medium opacity-90">{task.title}</h3>
-            <h5
-              className={`px-4 py-1 rounded-full text-sm font-medium ${
-                task.status === "Completed"
-                  ? "bg-green-500/80"
-                  : task.status === "In Progress"
-                  ? "bg-yellow-400/80"
-                  : "bg-red-500/80"
-              }`}
+    <div className="w-full flex flex-col items-center">
+      <div className="w-full max-w-6xl flex flex-col bg-white/5 backdrop-blur-md rounded-2xl p-4 md:p-6 shadow-xl border border-white/10">
+        {/* Header Row */}
+        <div className="grid grid-cols-5 gap-4 text-center text-sm md:text-base font-semibold bg-gradient-to-r from-emerald-600/60 to-teal-600/40 text-white rounded-xl py-3 px-4 shadow-md">
+          <h3 className="text-left">Employee Name</h3>
+          <h3>New Task</h3>
+          <h3>Active Task</h3>
+          <h3>Completed</h3>
+          <h3>Failed</h3>
+        </div>
+
+        {/* Scrollable Task Section */}
+        <div className="mt-4 max-h-64 overflow-y-auto space-y-3 pr-2 scrollbar-hide">
+          {authData.employees.map((task, index) => (
+            <div
+              key={index}
+              className="grid grid-cols-5 gap-4 items-center text-center text-white bg-white/10 border border-white/10 rounded-xl px-4 py-3 transition-all duration-300 hover:bg-white/20 hover:shadow-lg"
             >
-              {task.status}
-            </h5>
-          </div>
-        ))}
+              <h3 className="text-left font-medium text-lg tracking-wide">
+                {task.firstName}
+              </h3>
+              <span className="py-1 rounded-xl bg-gradient-to-br from-blue-500/80 to-indigo-600/80 text-white font-semibold shadow-md">
+                {task.taskNumbers.newTask}
+              </span>
+              <span className="py-1 rounded-xl bg-gradient-to-br from-yellow-400/80 to-amber-500/80 text-black font-semibold shadow-md">
+                {task.taskNumbers.active}
+              </span>
+              <span className="py-1 rounded-xl bg-gradient-to-br from-green-500/80 to-emerald-600/80 text-white font-semibold shadow-md">
+                {task.taskNumbers.completed}
+              </span>
+              <span className="py-1 rounded-xl bg-gradient-to-br from-red-500/80 to-rose-600/80 text-white font-semibold shadow-md">
+                {task.taskNumbers.failed}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
