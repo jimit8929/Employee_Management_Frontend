@@ -2,10 +2,10 @@ import React from "react";
 
 const TaskList = ({data}) => {
   const tasks = [
-    { title: "New Tasks", count: data.taskNumbers.active },
-    { title: "In Progress", count: data.taskNumbers.newTask },
+    { title: "Accepted Task", count: data.taskNumbers.active },
+    { title: "New Tasks", count: data.taskNumbers.newTask },
     { title: "Completed", count: data.taskNumbers.completed },
-    { title: "Pending Review", count: data.taskNumbers.failed },
+    { title: "Failed Task", count: data.taskNumbers.failed },
   ];
 
   return (
