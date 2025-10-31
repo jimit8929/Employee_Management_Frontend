@@ -7,7 +7,7 @@ import { AuthContext } from "./context/AuthProvider";
 const App = () => {
   const [user, setUser] = useState(null);
   const [loggedInUserData, setLoggedInUserData] = useState(null);
-  const authData = useContext(AuthContext);
+  const [authData,setAuthData] = useContext(AuthContext);
 
   useEffect(() => {
     if (authData) {
