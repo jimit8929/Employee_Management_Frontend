@@ -1,11 +1,11 @@
 import React from "react";
 
 
-const Header = () => {
+const Header = ({changeUser}) => {
   
   const logOutuser = () => {
     localStorage.removeItem("loggedInUser");
-    window.location.reload();
+    changeUser("");
   }
   
   return (

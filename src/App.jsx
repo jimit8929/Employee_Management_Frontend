@@ -22,7 +22,7 @@ const App = () => {
           }
         } catch (error) {
           console.error("Invalid user data in localStorage:", error);
-          localStorage.removeItem("loggedInUser"); // Clean it up if corrupted
+          localStorage.removeItem("loggedInUser");
         }
       }
     }
@@ -39,24 +39,34 @@ const App = () => {
 
       if (employee) {
         setUser("employee");
+        setLoggedInUserData(employee);
+
+        localStorage.setItem(
+          "loggedInUser",
+          JSON.stringify({ role: "employee", data: employee })
+        );
+      } else {
+        alert("Invalid Credentials");
       }
-
-      setLoggedInUserData(employee);
-
-      localStorage.setItem(
-        "loggedInUser",
-        JSON.stringify({ role: "employee", data: employee })
-      );
     } else {
       alert("Invalid Credentials");
     }
   };
 
+  // ✅ Prevent rendering dashboards until data is ready
+  if (user === "employee" && !loggedInUserData) {
+    return (
+      <div className="min-h-screen flex justify-center items-center text-gray-400 bg-[#1C1C1C]">
+        Loading employee data...
+      </div>
+    );
+  }
+
   return (
     <>
       {!user && <Login handleLogin={handleLogin} />}
-      {user === "admin" && <AdminDashboard />}
-      {user === "employee" && <EmployeeDashboard data={loggedInUserData} />}
+      {user === "admin" && <AdminDashboard changeUser={setUser}/>}
+      {user === "employee" && <EmployeeDashboard data={loggedInUserData} changeUser={setUser}/>}
     </>
   );
 };
